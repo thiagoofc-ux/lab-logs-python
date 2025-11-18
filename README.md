@@ -6,12 +6,12 @@ Ferramenta de análise de logs de autenticação do Windows, criada para identif
 
 ##  Funcionalidades
 
-- ✔ Detecção de brute force  
-- ✔ Logins realizados na madrugada  
-- ✔ Tentativas de login por usuários desabilitados  
-- ✔ Acessos massivos por múltiplos IPs em poucos minutos  
-- ✔ Leitura automática de logs no formato texto  
-- ✔ Ignora linhas vazias automaticamente  
+-  Detecção de brute force  
+-  Logins realizados na madrugada  
+-  Tentativas de login por usuários desabilitados  
+-  Acessos massivos por múltiplos IPs em poucos minutos  
+-  Leitura automática de logs no formato texto  
+-  Ignora linhas vazias automaticamente  
 
 ---
 
@@ -98,7 +98,7 @@ python log_analyzer.py
 
 
 
-## 📄 Licença
+##  Licença
 
 Uso livre para estudos e laboratórios de Segurança da Informação.
 
