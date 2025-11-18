@@ -20,6 +20,7 @@ Ferramenta de análise de logs de autenticação do Windows, criada para identif
 ```
 log_analyzer.py
 exemplo_logs.txt
+run_logs_analyzer.png
 README.md
 ```
 
