@@ -1,75 +1,104 @@
-# Log Analyzer — Projeto 3
+# Log Analyzer — Python
 
-Ferramenta simples de análise de logs desenvolvida em Python para detectar eventos suspeitos em registros de autenticação.
+Ferramenta de análise de logs de autenticação do Windows, criada para identificar atividades suspeitas como brute force, logins incomuns, acessos de usuários desabilitados e múltiplos IPs em janela curta.
 
 ---
 
 ##  Funcionalidades
 
-###  Detecção de Brute Force
-- Conta falhas de login por usuário.
-- Gera alerta quando o número de falhas ultrapassa o limite definido.
-
-###  Logins de Madrugada
-- Logins entre **00:00 e 05:00** são sinalizados como comportamento incomum.
-
-###  Usuários Desabilitados
-- Verifica tentativas de login realizadas por contas desativadas.
+- ✔ Detecção de brute force  
+- ✔ Logins realizados na madrugada  
+- ✔ Tentativas de login por usuários desabilitados  
+- ✔ Acessos massivos por múltiplos IPs em poucos minutos  
+- ✔ Leitura automática de logs no formato texto  
+- ✔ Ignora linhas vazias automaticamente  
 
 ---
 
 ##  Estrutura do Projeto
 
 ```
-log_analyzer.py   # Script principal de análise
-exemplo_logs.txt  # Arquivo com logs de teste
-README.md         # Documentação do projeto
+log_analyzer.py
+exemplo_logs.txt
+README.md
 ```
 
 ---
 
-## ▶ Como Executar
+##  Formato dos Logs
 
-Certifique-se de ter Python instalado e execute o script:
+Cada linha deve seguir:
 
-```bash
-python3 log_analyzer.py
+```
+YYYY-MM-DD HH:MM:SS | USERNAME | IP | STATUS
 ```
 
-Os alertas aparecerão diretamente no terminal.
+Exemplo:
+
+```
+2025-01-10 14:22:51 | user1 | 192.168.0.10 | FAILED
+```
+
+---
+
+##  exemplo_logs.txt (atualizado)
+
+```
+2025-01-10 01:45:10 | admin | 192.168.0.5 | SUCCESS
+2025-01-10 14:22:51 | user1 | 192.168.0.10 | FAILED
+2025-01-10 14:22:55 | user1 | 192.168.0.10 | FAILED
+2025-01-10 14:23:01 | user1 | 192.168.0.10 | FAILED
+2025-01-10 14:23:12 | user1 | 192.168.0.10 | FAILED
+2025-01-10 14:23:44 | user1 | 192.168.0.10 | FAILED
+
+2025-01-11 02:10:55 | user2 | 192.168.0.20 | SUCCESS
+
+2025-01-11 08:00:40 | guest | 10.0.0.10 | SUCCESS
+2025-01-11 08:30:20 | old_user | 10.0.0.20 | SUCCESS
+
+2025-01-11 09:00:00 | user3 | 8.8.8.1 | SUCCESS
+2025-01-11 09:00:30 | user3 | 8.8.4.4 | SUCCESS
+2025-01-11 09:01:10 | user3 | 1.1.1.1 | SUCCESS
+2025-01-11 09:01:50 | user3 | 1.0.0.1 | SUCCESS
+2025-01-11 09:02:05 | user3 | 200.200.200.200 | SUCCESS
+```
+
+---
+
+##  Como Executar
+
+```bash
+python log_analyzer.py
+```
 
 ---
 
 ##  Exemplo de Saída
 
-```text
-[ALERTA] Possível brute force detectado no usuário 'ana'. Falhas: 5
-[ALERTA] Login de madrugada detectado. Usuário 'jose' às 2024-11-18 03:22:15
-[ALERTA] Usuário desabilitado 'guest' tentou login (FAILED)
+```
+=== ALERTAS DETECTADOS ===
+[BRUTE FORCE] Usuário user1 teve 5 falhas em 5 minutos.
+[MADRUGADA] Login suspeito: admin às 2025-01-10 01:45:10
+[MADRUGADA] Login suspeito: user2 às 2025-01-11 02:10:55
+[DESABILITADO] Usuário desabilitado fez login: guest (2025-01-11 08:00:40)
+[DESABILITADO] Usuário desabilitado fez login: old_user (2025-01-11 08:30:20)
+[ACESSOS MASSIVOS] Usuário user3 acessou de 5 IPs diferentes em 3 minutos.
 ```
 
 ---
 
-##  Personalizações
+##  Como Funciona
 
-Dentro do arquivo **log_analyzer.py**, você pode ajustar:
-
-- Lista de usuários desabilitados  
-- Horário considerado madrugada  
-- Limite para detecção de brute force  
-
----
-
-##  Próximos Passos (Sugestões)
-
-- Enviar alertas por e-mail via SMTP.
-- Criar dashboard em Flask.
-- Integrar com Splunk, Elastic ou SIEMs.
-- Criar coleta automática de logs do Windows via WMI ou WinEvent API.
+- **Brute Force:** analisa falhas consecutivas dentro de uma janela de tempo  
+- **Madrugada:** qualquer login antes das 05:00  
+- **Usuários desabilitados:** lista configurável  
+- **Massivo por IP:** identifica múltiplos IPs em pouco tempo para o mesmo usuário  
 
 ---
 
-##  Licença
 
-Este projeto é open-source e pode ser utilizado para estudos, treinamentos e laboratórios de segurança.
+
+## 📄 Licença
+
+Uso livre para estudos e laboratórios de Segurança da Informação.
 
