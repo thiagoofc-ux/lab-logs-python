@@ -1,0 +1,8 @@
+2024-11-18 03:22:15 | user=jose | status=SUCCESS
+2024-11-18 08:11:03 | user=ana | status=FAILED
+2024-11-18 08:11:08 | user=ana | status=FAILED
+2024-11-18 08:11:12 | user=ana | status=FAILED
+2024-11-18 08:11:16 | user=ana | status=FAILED
+2024-11-18 08:11:22 | user=ana | status=FAILED
+2024-11-18 14:55:51 | user=guest | status=FAILED
+2024-11-18 14:57:32 | user=teste.desativado | status=SUCCESS
